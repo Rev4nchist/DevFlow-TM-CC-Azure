@@ -1,0 +1,46 @@
+# Project Development Workflow
+
+## Core Development Cycle
+
+### 1. Plan (Cursor Chat + TaskMaster)
+- Analyze requirements using TaskMaster context
+- Design solution architecture
+- Break down into implementable tasks
+- Create specific implementation commands
+
+### 2. Implement (Claude Code + Tools)
+- Generate code via Claude Code (`claude` command)
+- Execute with appropriate tools (Azure CLI, npm, etc.)
+- Use MCPs for automation where possible
+- Maintain git checkpoints at subtask boundaries
+
+### 3. Validate (MCPs + Testing)
+- Review generated code quality
+- Run tests and validations
+- Use MCPs for comprehensive checks
+- Identify improvements needed
+
+### 4. Progress (TaskMaster + Documentation)
+- Update task status in TaskMaster
+- Document learnings and decisions
+- Plan next steps based on outcomes
+- Maintain continuous improvement loop
+
+## Key Commands
+- `task-master next` - Get next task
+- `claude` - Launch Claude Code
+- `az` - Azure CLI commands
+- `/config` - Configure Claude Code settings
+
+## Success Metrics
+- 30-50% faster development cycles
+- Reduced context switching
+- Better code quality through AI assistance
+- Comprehensive documentation trail
+
+---
+*Keep this file concise; deeper TaskMaster mechanics live in 02_taskmaster_workflow.mdc*
+description:
+globs:
+alwaysApply: false
+---

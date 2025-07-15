@@ -1,0 +1,42 @@
+# TaskMaster Workflow Integration
+
+## Essential Commands
+
+### Task Navigation
+| Action | MCP Command | CLI Command |
+|--------|------------|-------------|
+| Show next task | `next_task` | `task-master next` |
+| Show specific task | `get_task` | `task-master show [id]` |
+| List all tasks | `get_tasks` | `task-master list` |
+
+### Task Updates
+| Action | MCP Command | CLI Command |
+|--------|------------|-------------|
+| Mark task done | `set_task_status` | `task-master set-status --id [id] --status done` |
+| Update task progress | `update_task` | `task-master update-task --id [id] --prompt "[update]"` |
+| Add subtask notes | `update_subtask` | `task-master update-subtask --id [id] --prompt "[notes]"` |
+
+### Task Creation
+| Action | MCP Command | CLI Command |
+|--------|------------|-------------|
+| Parse PRD | `parse_prd` | `task-master parse-prd [file]` |
+| Add new task | `add_task` | `task-master add-task --prompt "[description]"` |
+| Expand task | `expand_task` | `task-master expand --id [id]` |
+
+## Workflow Integration Points
+
+1. **Start of Session**: Run `next_task` to get current context
+2. **During Implementation**: Update subtasks with progress notes
+3. **Task Completion**: Set status to done, check next task
+4. **End of Session**: Document learnings in task updates
+
+## Tags
+- Currently using `master` tag by default
+- Switch tags with `use_tag` for branch-specific task sets
+
+---
+*For exhaustive command reference see taskmaster.mdc*
+description:
+globs:
+alwaysApply: false
+---

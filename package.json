@@ -1,0 +1,36 @@
+{
+  "name": "dev-workflow-framework",
+  "version": "1.0.0",
+  "description": "AI-powered development workflow with TaskMaster, Claude Code, and Azure CLI integration",
+  "main": "index.js",
+  "scripts": {
+    "verify": "node scripts/verify-setup.js",
+    "setup": "node scripts/setup.js",
+    "test": "echo \"No tests configured\""
+  },
+  "keywords": [
+    "workflow",
+    "taskmaster",
+    "claude",
+    "azure",
+    "ai",
+    "development",
+    "productivity"
+  ],
+  "author": "Your Team",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "@types/node": "^20.0.0",
+    "dotenv": "^16.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourorg/dev-workflow-framework"
+  }
+} 

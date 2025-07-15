@@ -1,0 +1,153 @@
+# Azure CLI Integration Patterns
+
+## Quick Reference
+
+### Authentication & Setup
+```bash
+# Login to Azure
+az login
+
+# Set default subscription
+az account set --subscription "[subscription-name-or-id]"
+
+# Verify current context
+az account show --output table
+```
+
+### Common Resource Operations
+
+#### Resource Groups
+```bash
+# Create resource group
+az group create --name [rg-name] --location [region]
+
+# List all resource groups
+az group list --output table
+
+# Delete resource group (and all resources)
+az group delete --name [rg-name] --yes
+```
+
+#### Cosmos DB
+```bash
+# Create Cosmos DB with Gremlin
+az cosmosdb create \
+  --name [account-name] \
+  --resource-group [rg-name] \
+  --kind GlobalDocumentDB \
+  --capabilities EnableGremlin \
+  --locations regionName="[region]" failoverPriority=0
+
+# Create SQL database
+az cosmosdb sql database create \
+  --account-name [account-name] \
+  --resource-group [rg-name] \
+  --name [db-name]
+```
+
+#### App Service
+```bash
+# Create app service plan
+az appservice plan create \
+  --name [plan-name] \
+  --resource-group [rg-name] \
+  --sku B1
+
+# Create web app
+az webapp create \
+  --name [app-name] \
+  --resource-group [rg-name] \
+  --plan [plan-name]
+```
+
+#### Azure Functions
+```bash
+# Create storage account (required for functions)
+az storage account create \
+  --name [storage-name] \
+  --resource-group [rg-name] \
+  --sku Standard_LRS
+
+# Create function app
+az functionapp create \
+  --name [function-name] \
+  --resource-group [rg-name] \
+  --storage-account [storage-name] \
+  --consumption-plan-location [region]
+```
+
+## Best Practices
+
+### Output Formatting
+- Use `--output table` for human readability
+- Use `--output json` for scripting
+- Use `--query` for filtering results
+
+### Error Handling
+```typescript
+// Example TypeScript wrapper
+import { execSync } from 'child_process';
+
+function azCommand(command: string): string {
+  try {
+    return execSync(`az ${command}`, { encoding: 'utf8' });
+  } catch (error) {
+    console.error('Azure CLI Error:', error);
+    throw new Error(`Failed to execute: az ${command}`);
+  }
+}
+```
+
+### Environment Variables
+```bash
+# Store common values
+export AZURE_RESOURCE_GROUP="my-project-rg"
+export AZURE_LOCATION="eastus"
+export AZURE_SUBSCRIPTION="[subscription-id]"
+```
+
+### Subscription Management
+- Always verify correct subscription before operations
+- Use `--subscription` flag for explicit control
+- Set up service principals for automation
+
+## Integration with Workflow
+
+1. **During Planning**: Use `az [service] list` to check existing resources
+2. **During Implementation**: Create resources via CLI commands
+3. **During Validation**: Use `az [service] show` to verify creation
+4. **During Cleanup**: Use `az group delete` to remove test resources
+
+## Common Patterns for Microsoft Orgs
+
+### Naming Conventions
+```
+Resource Groups: [project]-[environment]-rg
+Web Apps: [project]-[service]-[environment]
+Databases: [project]-db-[environment]
+Storage: [project]storage[environment]
+```
+
+### Tag Strategy
+```bash
+# Add tags during creation
+az resource tag \
+  --tags Environment=Dev Project=MyApp Owner=TeamName \
+  --ids [resource-id]
+```
+
+### Cost Management
+```bash
+# Check resource costs
+az consumption usage list \
+  --start-date 2024-01-01 \
+  --end-date 2024-01-31 \
+  --output table
+```
+
+---
+*Use Desktop Commander MCP to execute these commands directly from Cursor*
+description:
+globs:
+alwaysApply: false
+---

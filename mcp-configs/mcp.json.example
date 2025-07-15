@@ -1,0 +1,39 @@
+{
+  "mcps": [
+    {
+      "id": "taskmaster",
+      "name": "TaskMaster AI",
+      "description": "AI-powered project management",
+      "command": "npx",
+      "args": ["-y", "@fourth/task-master-mcp"],
+      "env": {
+        "ANTHROPIC_API_KEY": "${ANTHROPIC_API_KEY}",
+        "PERPLEXITY_API_KEY": "${PERPLEXITY_API_KEY}"
+      }
+    },
+    {
+      "id": "desktop-commander",
+      "name": "Desktop Commander",
+      "description": "Execute terminal commands from Cursor",
+      "command": "npx",
+      "args": ["-y", "desktop-commander-mcp"]
+    },
+    {
+      "id": "github",
+      "name": "GitHub MCP",
+      "description": "GitHub integration for repos, PRs, and issues",
+      "command": "npx",
+      "args": ["-y", "@fourth/github-mcp"],
+      "env": {
+        "GITHUB_TOKEN": "${GITHUB_TOKEN}"
+      }
+    },
+    {
+      "id": "web-search",
+      "name": "Web Search",
+      "description": "Search the web for current information",
+      "command": "npx",
+      "args": ["-y", "@fourth/web-search-mcp"]
+    }
+  ]
+} 
