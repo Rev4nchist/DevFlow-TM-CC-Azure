@@ -83,18 +83,18 @@ npm run verify
 
 ### Try Your First Workflow
 
-1. **Create a PRD**:
+1. **Verify Your Setup** (Recommended):
+   ```bash
+   # Import the setup verification task
+   task-master parse-prd documentation/setup-verification-task.md
+   task-master next
+   ```
+   This creates a comprehensive verification workflow to test all components.
+
+2. **Or Create Your Own Project**:
    ```bash
    echo "Build a todo app with user authentication" > .taskmaster/docs/todo-app.txt
-   ```
-
-2. **Generate Tasks**:
-   ```bash
    task-master parse-prd .taskmaster/docs/todo-app.txt
-   ```
-
-3. **Start Coding**:
-   ```bash
    task-master next
    claude code "Implement the current task"
    ```

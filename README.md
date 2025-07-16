@@ -1,6 +1,6 @@
 # 🚀 Dev Workflow Framework
 
-> Transform your development process with an AI-powered workflow that reduces cycle time by 30-50%
+> Your One Stop Shop for seamless development: From idea to deployment in a single workspace
 
 ## 🎯 What is this?
 
@@ -14,9 +14,9 @@ All within your favorite IDE (Cursor, VS Code, JetBrains).
 
 ## 🌟 Key Benefits
 
-- **30-50% faster development cycles** - Proven in production
-- **Zero context switching** - Everything happens in your IDE
-- **AI-powered assistance** - From PRD to deployed code
+- **One Stop Shop Experience** - Everything you need in one workspace
+- **Zero context switching** - From PRD to deployment without leaving your IDE
+- **AI-powered assistance** - Claude Code as your pair programmer
 - **Built for teams** - Consistent workflow across your organization
 - **Microsoft-optimized** - First-class Azure integration
 

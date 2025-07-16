@@ -76,6 +76,15 @@ if (checkCommand('task-master')) {
   if (checkCommand('tm')) {
     log.info('  Alias "tm" is working');
   }
+  
+  // Test TaskMaster command execution
+  try {
+    execSync('task-master --version', { stdio: 'ignore' });
+    log.success('TaskMaster command test passed');
+  } catch {
+    log.warning('TaskMaster installed but command test failed');
+    hasWarnings = true;
+  }
 } else {
   log.error('TaskMaster CLI not found');
   log.info('  Install with: npm install -g @fourth/task-master');
@@ -167,12 +176,48 @@ if (checkFile('.cursor/mcp.json')) {
 if (checkFile('.env')) {
   log.success('Environment file exists');
   
-  // Check for placeholder values
+  // Check for placeholder values and API key configuration
   try {
     const envContent = fs.readFileSync('.env', 'utf8');
-    if (envContent.includes('your_') && envContent.includes('_here')) {
-      log.warning('Environment file has placeholder values - remember to update them');
+    
+    // Check for placeholder patterns
+    const placeholderPatterns = [
+      'your_api_key_here',
+      'your_anthropic_key_here', 
+      'your_perplexity_key_here',
+      'your_github_token_here',
+      'your_subscription_id',
+      'your_tenant_id'
+    ];
+    
+    const hasPlaceholders = placeholderPatterns.some(pattern => 
+      envContent.toLowerCase().includes(pattern.toLowerCase())
+    );
+    
+    if (hasPlaceholders) {
+      log.warning('Environment file has placeholder API keys - update with real values');
+      log.info('  Get Claude API key from: https://console.anthropic.com');
+      log.info('  Get GitHub token from: https://github.com/settings/tokens');
       hasWarnings = true;
+    } else {
+      // Check if key variables are present (without revealing values)
+      const hasAnthropicKey = envContent.includes('ANTHROPIC_API_KEY=') && 
+                              !envContent.includes('ANTHROPIC_API_KEY=your_');
+      const hasGitHubToken = envContent.includes('GITHUB_TOKEN=') && 
+                             !envContent.includes('GITHUB_TOKEN=your_');
+      
+      if (hasAnthropicKey) {
+        log.success('Anthropic API key configured');
+      } else {
+        log.warning('Anthropic API key not configured - required for TaskMaster AI features');
+        hasWarnings = true;
+      }
+      
+      if (hasGitHubToken) {
+        log.success('GitHub token configured');
+      } else {
+        log.info('GitHub token not configured (optional for GitHub MCP)');
+      }
     }
   } catch {
     log.warning('Could not read environment file');

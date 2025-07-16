@@ -6,7 +6,7 @@
   "scripts": {
     "verify": "node scripts/verify-setup.js",
     "setup": "node scripts/setup.js",
-    "test": "echo \"No tests configured\""
+    "test": "jest"
   },
   "keywords": [
     "workflow",
@@ -27,7 +27,8 @@
     "dotenv": "^16.0.0"
   },
   "devDependencies": {
-    "typescript": "^5.0.0"
+    "typescript": "^5.0.0",
+    "jest": "^29.0.0"
   },
   "repository": {
     "type": "git",
